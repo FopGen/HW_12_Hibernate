@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.DAO.ClientDao;
 import org.example.config.HibernateConfig;
 import org.example.models.ClientModel;
 import org.hibernate.Session;
@@ -8,35 +9,24 @@ import org.hibernate.Transaction;
 
 public class ClientCrudService {
 
-    private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
+    private final ClientDao clientDao = new ClientDao();
 
-    public void save(ClientModel client){
-        try(Session session = sessionFactory.openSession()){
-            Transaction tx = session.beginTransaction();
-            session.persist(client);
-            tx.commit();
+    public void saveClient(ClientModel client){
+        if ((client.getName().length()<3)||(client.getName().length()>200)){
+            return;
         }
+        clientDao.save(client);
     }
 
-    public ClientModel findById(int id){
-        try(Session session = sessionFactory.openSession()){
-            return session.get(ClientModel.class, id);
-        }
+    public ClientModel findClientById(int id){
+        return clientDao.findById(id);
     }
 
-    public void update(ClientModel client) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
-            session.update(client);
-            tx.commit();
-        }
+    public void updateClient(ClientModel client){
+        clientDao.update(client);
     }
 
-    public void delete(ClientModel client) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
-            session.delete(client);
-            tx.commit();
-        }
+    public void deleteClient(ClientModel client){
+        clientDao.delete(client);
     }
 }

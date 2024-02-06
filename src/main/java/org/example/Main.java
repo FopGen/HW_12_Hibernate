@@ -1,32 +1,28 @@
 package org.example;
 
-
-import org.example.config.HibernateConfig;
+import org.example.DAO.PlanetDao;
 import org.example.models.ClientModel;
+import org.example.DAO.ClientDao;
+import org.example.models.PlanetModel;
 import org.example.service.ClientCrudService;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.example.service.PlanetCrudService;
 
 public class Main {
     public static void main(String[] args) {
-
-        ClientCrudService clientService = new ClientCrudService();
-
-        ClientModel client = new ClientModel();
-        client.setName("Twelve");
-        clientService.save(client);
-
-        ClientModel clientModel = clientService.findById(5);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Found Client: " + clientModel.getName());
+//
+//        ClientCrudService clientCrudService = new ClientCrudService();
+//
+//        ClientModel newClient = new ClientModel();
+//        newClient.setName("Tw");
+//        clientCrudService.saveClient(newClient);
 
 
+        PlanetCrudService planetCrudService = new PlanetCrudService();
 
+        PlanetModel newPlanet = new PlanetModel();
+        newPlanet.setId("Sun1");
+        newPlanet.setName("SunStation1");
 
-
-
-//            hibernateConfig.close();
-
-
+        planetCrudService.savePlanet(newPlanet);
     }
 }
