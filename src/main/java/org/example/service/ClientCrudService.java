@@ -12,21 +12,32 @@ public class ClientCrudService {
     private final ClientDao clientDao = new ClientDao();
 
     public void saveClient(ClientModel client){
-        if ((client.getName().length()<3)||(client.getName().length()>200)){
-            return;
+        if (validateName(client)){
+            clientDao.save(client);
         }
-        clientDao.save(client);
     }
+
 
     public ClientModel findClientById(int id){
         return clientDao.findById(id);
     }
 
     public void updateClient(ClientModel client){
-        clientDao.update(client);
+        if (validateName(client)) {
+            clientDao.update(client);
+        }
     }
 
     public void deleteClient(ClientModel client){
-        clientDao.delete(client);
+        if (validateName(client)) {
+            clientDao.delete(client);
+        }
+    }
+    private static boolean validateName(ClientModel client) {
+        if ((client.getName().length()<3)||(client.getName().length()>200)){
+            System.out.println("the field 'NAME' incorrect!");
+            return false;
+        }
+        return true;
     }
 }

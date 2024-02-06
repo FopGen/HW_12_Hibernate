@@ -9,20 +9,20 @@ import org.example.service.PlanetCrudService;
 
 public class Main {
     public static void main(String[] args) {
+
+        ClientCrudService clientCrudService = new ClientCrudService();
+
+        ClientModel newClient = new ClientModel();
+        newClient.setName("Twe");
+        clientCrudService.saveClient(newClient);
+
+
+//        PlanetCrudService planetCrudService = new PlanetCrudService();
 //
-//        ClientCrudService clientCrudService = new ClientCrudService();
+//        PlanetModel newPlanet = new PlanetModel();
+//        newPlanet.setId("Sun1");
+//        newPlanet.setName("SunStation1");
 //
-//        ClientModel newClient = new ClientModel();
-//        newClient.setName("Tw");
-//        clientCrudService.saveClient(newClient);
-
-
-        PlanetCrudService planetCrudService = new PlanetCrudService();
-
-        PlanetModel newPlanet = new PlanetModel();
-        newPlanet.setId("Sun1");
-        newPlanet.setName("SunStation1");
-
-        planetCrudService.savePlanet(newPlanet);
+//        planetCrudService.savePlanet(newPlanet);
     }
 }
