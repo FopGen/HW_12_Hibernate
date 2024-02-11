@@ -1,39 +1,35 @@
 package org.example.service;
 
 import org.example.DAO.ClientDao;
-import org.example.config.HibernateConfig;
-import org.example.models.ClientModel;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.example.models.Client;
 
 public class ClientCrudService {
 
     private final ClientDao clientDao = new ClientDao();
 
-    public void saveClient(ClientModel client){
+    public void saveClient(Client client){
         if (validateName(client)){
             clientDao.save(client);
         }
     }
 
 
-    public ClientModel findClientById(int id){
+    public Client findClientById(int id){
         return clientDao.findById(id);
     }
 
-    public void updateClient(ClientModel client){
+    public void updateClient(Client client){
         if (validateName(client)) {
             clientDao.update(client);
         }
     }
 
-    public void deleteClient(ClientModel client){
+    public void deleteClient(Client client){
         if (validateName(client)) {
             clientDao.delete(client);
         }
     }
-    private static boolean validateName(ClientModel client) {
+    private static boolean validateName(Client client) {
         if ((client.getName().length()<3)||(client.getName().length()>200)){
             System.out.println("the field 'NAME' incorrect!");
             return false;

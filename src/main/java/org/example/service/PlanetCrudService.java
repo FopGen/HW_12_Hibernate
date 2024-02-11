@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.DAO.PlanetDao;
-import org.example.models.PlanetModel;
+import org.example.models.Planet;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +10,7 @@ public class PlanetCrudService {
 
     private final PlanetDao planetDao = new PlanetDao();
 
-    public void savePlanet(PlanetModel planet){
+    public void savePlanet(Planet planet){
 
         if (validateId(planet)){
             planet.setId(planet.getId().toUpperCase());
@@ -18,25 +18,26 @@ public class PlanetCrudService {
         }
     }
 
-    public PlanetModel findClientById(int id){
-        return planetDao.findById(id);
+    public Planet findPlanetById(String id){
+
+        return planetDao.findById(id.toUpperCase());
     }
 
-    public void updateClient(PlanetModel planet){
+    public void updateClient(Planet planet){
         if(validateId(planet)){
             planet.setId(planet.getId().toUpperCase());
             planetDao.update(planet);
         }
     }
 
-    public void deleteClient(PlanetModel planet){
+    public void deleteClient(Planet planet){
         if(validateId(planet)){
             planet.setId(planet.getId().toUpperCase());
             planetDao.delete(planet);
         }
     }
 
-    private Boolean validateId(PlanetModel planet){
+    private Boolean validateId(Planet planet){
         Pattern pattern = Pattern.compile("\\W");
         Matcher matcher = pattern.matcher(planet.getId());
         if (matcher.find()) {

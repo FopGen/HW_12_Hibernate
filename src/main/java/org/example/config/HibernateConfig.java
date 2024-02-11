@@ -1,8 +1,8 @@
 package org.example.config;
 
-import lombok.Getter;
-import org.example.models.ClientModel;
-import org.example.models.PlanetModel;
+import org.example.models.Client;
+import org.example.models.Planet;
+import org.example.models.Ticket;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -22,8 +22,9 @@ public final class HibernateConfig {
 
     private HibernateConfig(){
         sessionFactory = new Configuration()
-                .addAnnotatedClass(ClientModel.class)
-                .addAnnotatedClass(PlanetModel.class)
+                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Planet.class)
+                .addAnnotatedClass(Ticket.class)
                 .buildSessionFactory();
     }
 

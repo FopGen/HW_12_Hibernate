@@ -1,42 +1,41 @@
 package org.example.DAO;
 
 import org.example.config.HibernateConfig;
-import org.example.models.Planet;
+import org.example.models.Ticket;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class PlanetDao {
-    private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
+public class TicketDao {
+    private final SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
-    public void save(Planet planet){
+    public void save(Ticket ticket){
         try(Session session = sessionFactory.openSession()){
             Transaction tx = session.beginTransaction();
-            session.persist(planet);
+            session.persist(ticket);
             tx.commit();
         }
     }
 
-    public Planet findById(String id){
+    public Ticket findById(int id){
         try(Session session = sessionFactory.openSession()){
-            return session.get(Planet.class, id);
+            return session.get(Ticket.class, id);
         }
     }
 
-    public void update(Planet planet) {
+    public void update(Ticket ticket) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
-            session.update(planet);
+            session.update(ticket);
             tx.commit();
         }
     }
 
-    public void delete(Planet planet) {
+    public void delete(Ticket ticket) {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
-            session.delete(planet);
+            session.delete(ticket);
             tx.commit();
         }
     }
-
 }
